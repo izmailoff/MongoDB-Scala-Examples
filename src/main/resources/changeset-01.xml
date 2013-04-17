@@ -1,0 +1,28 @@
+<mongoChangeLog>
+
+    <changeSet changeId="1 add languages" author="alex">
+        <script>
+
+            // clear collections
+            // maybe this is dangerous: db.mongeez.remove({});
+            db.languages.remove({});
+
+            // insert languages
+            english = {
+                name: "English",
+                nativeName: "English",
+                createdOn: new Date()
+            };
+            db.languages.insert(english);
+
+            russian = {
+                name: "Russian",
+                nativeName: "Русский", 
+                createdOn: new Date()
+            };
+            db.languages.insert(russian);
+
+        </script>
+    </changeSet>
+
+</mongoChangeLog>

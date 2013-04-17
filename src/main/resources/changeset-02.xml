@@ -1,0 +1,9 @@
+<mongoChangeLog>
+
+    <changeSet changeId="2 add indexes" author="alex">
+        <script>
+          db.languages.ensureIndex({name: 1})
+        </script>
+    </changeSet>
+
+</mongoChangeLog>
