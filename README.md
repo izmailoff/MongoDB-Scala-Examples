@@ -1,3 +1,7 @@
+Build Status
+====================
+[![Build Status](https://travis-ci.org/izmailoff/MongoDB-Scala-Examples.png)](https://travis-ci.org/izmailoff/MongoDB-Scala-Examples)
+
 Abstract
 ====================
 
