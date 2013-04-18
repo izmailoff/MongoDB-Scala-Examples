@@ -20,7 +20,7 @@ import net.liftweb.mongodb.record.field.ObjectIdField
 import net.liftweb.mongodb.record.MongoId
 
 object RogueMongo extends MongoIdentifier {
-  override def jndiName = "rogue_mongo"
+  override def jndiName = "test"
 
   private var mongo: Option[Mongo] = None
 
@@ -69,7 +69,6 @@ class User extends MongoRecord[User] with MongoId[User] with IndexedRecord[User]
 }
 object User extends User with MongoMetaRecord[User] {
   override def collectionName = "users"
-  override def mongoIdentifier = RogueMongo
 
   trait FK[T <: FK[T]] extends MongoRecord[T] {
     self: T =>
@@ -87,5 +86,4 @@ class Post extends MongoRecord[Post] with ObjectIdPk[Post] with IndexedRecord[Po
 }
 object Post extends Post with MongoMetaRecord[Post] {
   override def collectionName = "posts"
-  override def mongoIdentifier = RogueMongo
 }

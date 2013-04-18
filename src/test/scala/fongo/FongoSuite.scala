@@ -3,15 +3,14 @@ package fongo
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.BeforeAndAfter
-import org.junit.runner.RunWith
 import com.foursquare.fongo.Fongo
 import rogue.User
 import net.liftweb.mongodb.MongoDB
 import net.liftweb.mongodb.MongoIdentifier
 import com.foursquare.rogue.LiftRogue._
+import com.mongodb.casbah.Imports._
+import com.foursquare.rogue.Query
 import org.scalatest.BeforeAndAfterAll
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
@@ -26,7 +25,7 @@ import org.scalatest.junit.JUnitRunner
  * with Fongo, or in production with Mongo.
  */
 object FongoTest extends MongoIdentifier {
-  override def jndiName = "rogue_mongo"
+  override def jndiName = "test"
 
   private val dbName = "newdb"
   private val fongo = new Fongo("server1")
@@ -74,13 +73,9 @@ class FongoSuite extends FunSuite with BeforeAndAfter with BeforeAndAfterAll {
 
   test("Insert adds document to collection") {
     assert(0 === collection.count)
-    val user = User.createRecord.username("testuser").password("testpass").points(111).email("test@test.com")
-    user.save(true)
+    val user = User.createRecord.username("testuser").password("testpass").points(111).email("test@test.com").save(true)
     assert(1 === collection.count)
     assert(user.asDBObject === collection.findOne)
-    // converting to DBObject because User does not implement equals properly and is not a case class,
-    // so assert would fail otherwise:
-    assert(user.asDBObject === User.find(user.asDBObject).get.asDBObject)
   }
 
   test("Update updates a field") {
